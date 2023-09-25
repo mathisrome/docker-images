@@ -13,8 +13,7 @@ services:
 
   php:
     build:
-      context: .
-      target: php
+      context: ./infra/images/php
     volumes:
       - ./infra/volumes/composer:/root/.composer
       - ./infra/config/php/project.ini:/usr/local/etc/php/conf.d/project.ini:ro
