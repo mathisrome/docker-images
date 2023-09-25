@@ -1,0 +1,45 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - ./infra/volumes/database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: my_password
+    networks:
+      - nw.mathisrome
+    ports:
+      - "3306:3306"
+
+  php:
+    build:
+      context: .
+      target: php
+    volumes:
+      - ./infra/volumes/composer:/root/.composer
+      - ./infra/config/php/project.ini:/usr/local/etc/php/conf.d/project.ini:ro
+      - ./app:/var/www/app
+    environment:
+      APP_ENV: dev
+    networks:
+      - nw.mathisrome
+    depends_on:
+      - mariadb
+    tty: true
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./infra/volumes/logs/nginx:/var/log/nginx
+      - ./infra/config/nginx/virtualhost.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./app:/var/www/app
+    networks:
+      - nw.mathisrome
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    tty: true
+
+networks:
+  nw.mathisrome:

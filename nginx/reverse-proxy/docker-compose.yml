@@ -1,0 +1,15 @@
+services:
+  nginx:
+    build:
+      context: .
+    container_name: nginx-reverse-proxy
+    network_mode: host
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - type: bind
+        source: /usr/share/nginx/html
+        target: /usr/share/nginx/html
+      - /etc/letsencrypt/live/monsite.fr/fullchain.pem:/etc/letsencrypt/live/monsite.fr/fullchain.pem
+      - /etc/letsencrypt/live/monsite.fr/privkey.pem:/etc/letsencrypt/live/monsite.fr/privkey.pem
