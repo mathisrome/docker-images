@@ -1,7 +1,8 @@
 FROM php:8.2-fpm
 
 ## Installation des utilitaires
-RUN apt-get update && apt-get install -y curl vim nano default-mysql-client git zip
+RUN apt-get update && apt-get install -y curl vim nano default-mysql-client git zip npm
+RUN npm install -g yarn
 
 
 ## Config Timezone
