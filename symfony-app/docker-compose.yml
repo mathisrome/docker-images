@@ -17,6 +17,8 @@ services:
     container_name: portfolio_phpmyadmin
     environment:
       PMA_HOST: portfolio_mariadb
+      PMA_USER: root
+      PMA_PASSWORD: root
     networks:
       - nw.portfolio
     ports:
