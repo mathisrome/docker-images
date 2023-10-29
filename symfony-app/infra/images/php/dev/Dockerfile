@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine AS build
+FROM php:8.2-fpm AS build
 
 ## Installation des utilitaires
 RUN apt-get update && apt-get install -y curl vim nano git zip npm

@@ -3,7 +3,7 @@ services:
     image: mariadb:latest
     restart: unless-stopped
     volumes:
-      - ./infra/volumes/database:/var/lib/mysql
+      - ./infra/volumes/prod/database:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     networks:
@@ -34,6 +34,8 @@ services:
     image: app-portfolio-nginx
     networks:
       - nw.portfolio_frontend
+    volumes:
+      - ./infra/volumes/prod/logs/nginx:/var/log/nginx
     volumes_from:
       - php
     ports:

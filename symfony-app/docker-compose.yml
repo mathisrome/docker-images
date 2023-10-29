@@ -4,7 +4,7 @@ services:
     container_name: portfolio_mariadb
     restart: unless-stopped
     volumes:
-      - ./infra/volumes/database:/var/lib/mysql
+      - ./infra/volumes/dev/database:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
     networks:
@@ -29,7 +29,7 @@ services:
       context: ./infra/images/php/dev
     container_name: portfolio_php
     volumes:
-      - ./infra/volumes/composer:/root/.composer
+      - ./infra/volumes/dev/composer:/root/.composer
       - ./infra/images/php/dev/project.ini:/usr/local/etc/php/conf.d/project.ini:ro
       - ./app:/var/www/app
     environment:
@@ -44,7 +44,7 @@ services:
     image: nginx:latest
     container_name: portfolio_nginx
     volumes:
-      - ./infra/volumes/logs/nginx:/var/log/nginx
+      - ./infra/volumes/dev/logs/nginx:/var/log/nginx
       - ./infra/images/nginx/dev/virtualhost.conf:/etc/nginx/conf.d/default.conf:ro
       - ./app:/var/www/app
     networks:
