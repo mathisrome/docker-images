@@ -7,16 +7,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     networks:
-      - nw.portfolio_backend
+      - nw.backend
     ports:
       - "3306:3306"
 
   php:
-    image: app-portfolio-php
+    image: app-php
     environment:
       APP_ENV: prod
       MESSENGER_TRANSPORT_DSN: "doctrine://default?auto_setup=0"
-      DATABASE_URL: "mysql://root:root@mariadb/portfolio?serverVersion=mariadb-10.5.8"
+      DATABASE_URL: "mysql://root:root@mariadb/database_name?serverVersion=mariadb-10.5.8"
       MAILER_DSN: "sendmail://default"
       GOOGLE_RECAPTCHA_SITE_KEY: "6Lc0_64ZAAAAAFnJ9-nQ_r1F6hdlG-bSt297kJ1j"
       GOOGLE_RECAPTCHA_SECRET: "6Lc0_64ZAAAAAHYotZQyNJECKrtA0a7aB0-_VHku"
@@ -24,18 +24,19 @@ services:
       RECAPTCHA3_SECRET: "6Lc0_64ZAAAAAHYotZQyNJECKrtA0a7aB0-_VHku"
       GOOGLE_TAG_MANAGER_ID: "G-JNY6VGP4EQ"
     networks:
-      - nw.portfolio_backend
-      - nw.portfolio_frontend
+      - nw.backend
+      - nw.frontend
     depends_on:
       - mariadb
     tty: true
 
   nginx:
-    image: app-portfolio-nginx
+    image: nginx:1.22
     networks:
-      - nw.portfolio_frontend
+      - nw.frontend
     volumes:
       - ./infra/volumes/prod/logs/nginx:/var/log/nginx
+      - ./infra/nginx/prod/virtualhost.conf:/etc/nginx/conf.d/
     volumes_from:
       - php
     ports:
@@ -45,5 +46,5 @@ services:
     tty: true
 
 networks:
-  nw.portfolio_backend:
-  nw.portfolio_frontend:
+  nw.backend:
+  nw.frontend:
