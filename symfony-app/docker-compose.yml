@@ -1,6 +1,6 @@
 services:
   mariadb:
-    image: mariadb:latest
+    image: mariadb:11.1.2
     restart: unless-stopped
     volumes:
       - ./infra/volumes/dev/database:/var/lib/mysql
