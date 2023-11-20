@@ -46,7 +46,5 @@ services:
 
   mailcatcher:
     restart: on-failure
-    image: dockage/mailcatcher:0.9.0
-    ports:
-      - "1080:1080"
-      - "25:25"
+    image: schickling/mailcatcher
+    ports: [ 1025, 1080 ]
