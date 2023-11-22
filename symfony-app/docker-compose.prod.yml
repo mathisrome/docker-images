@@ -23,6 +23,9 @@ services:
       RECAPTCHA3_KEY: "6Lc0_64ZAAAAAFnJ9-nQ_r1F6hdlG-bSt297kJ1j"
       RECAPTCHA3_SECRET: "6Lc0_64ZAAAAAHYotZQyNJECKrtA0a7aB0-_VHku"
       GOOGLE_TAG_MANAGER_ID: "G-JNY6VGP4EQ"
+    volumes:
+      - ./infra/php/prod/project.ini:/usr/local/etc/php/conf.d/project.ini
+      - ./infra/php/prod/www.conf:/usr/local/etc/php-fpm.d/www.conf
     networks:
       - nw.backend
       - nw.frontend
