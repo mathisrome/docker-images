@@ -1,0 +1,18 @@
+FROM python:3.11-bookworm
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+## Installation des utilitaires
+RUN apt update && apt install -y curl vim nano git zip
+
+## NodeJs
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt install nodejs -y
+
+WORKDIR /var/www/app
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt

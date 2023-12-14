@@ -1,0 +1,35 @@
+FROM python:3.11-alpine as build
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+## Installation des utilitaires
+RUN apk update && apk add curl vim nano git zip npm
+
+ADD build.tar.gz /var/www
+
+WORKDIR /var/www/app
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt && \
+    python manage.py collectstatic --noinput && \
+    npm install && \
+    npm run build && \
+    rm -rf node_modules
+
+FROM python:3.11-alpine as final
+
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
+## Config Timezone
+RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+COPY --from=build /var/www/app /var/www/app
+
+WORKDIR /var/www/app
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+VOLUME ["/var/www/app"]
