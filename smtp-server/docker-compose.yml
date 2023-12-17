@@ -1,0 +1,13 @@
+services:
+  mail.mathisrome.fr:
+    build:
+      context: .
+      args:
+        EMAIL: ${EMAIL} # Email of your OHV / GMAIL .... Acount
+        EMAIL_PASSWORD: ${EMAIL_PASSWORD} # Password for this email
+        DOMAIN_NAME: ${DOMAIN_NAME} # Domain name like mail.mathisrome.fr
+        SMTP_DOMAIN: ${SMTP_DOMAIN} # ssl0.ovh.net for example
+        SMTP_PORT: ${SMTP_PORT} # 587 for OVH
+    volumes:
+      - ./infra/volumes/prod/logs/smtp-server:/var/log/postfix
+      - ./infra/smtp-server/letsencrypt:/etc/letsencrypt
