@@ -9,3 +9,7 @@ Exemples :
  - letsencrypt/foo.fr
 
 N'oubliez pas de changer vos variables d'environnements.
+
+Comme vous pouvez le voir dans le fichier `docker-compose.yml`.
+Le nom du service pour le serveur smtp doit être identique à votre nom de domaine.
+Sinon cela posera problème.
