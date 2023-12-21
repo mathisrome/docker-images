@@ -15,6 +15,8 @@ COPY main.cf /etc/postfix/main.cf
 RUN sed -i "s/relayhost =/relayhost = [${SMTP_DOMAIN}]:${SMTP_PORT}/g" /etc/postfix/main.cf && \
     sed -i "s/<your.domain>/${DOMAIN_NAME}/g" /etc/postfix/main.cf && \
     sed -i "s/#smtps/smtps/g" /etc/postfix/master.cf && \
+    sed -i "s/#  -o smtpd_tls_wrappermode=yes/  -o smtpd_tls_wrappermode=yes/g" /etc/postfix/master.cf && \
+    sed -i "s/#  -o smtpd_sasl_auth_enable=yes/  -o smtpd_sasl_auth_enable=yes/g" /etc/postfix/master.cf && \
     sh -c 'echo "root: ${EMAIL}" >> /etc/aliases' && \
     sh -c 'echo "${DOMAIN_NAME}" >> /etc/mailname' && \
     sh -c 'echo "[${SMTP_DOMAIN}]:${SMTP_PORT} ${EMAIL}:${EMAIL_PASSWORD}" >> /etc/postfix/sasl/sasl_passwd' && \
