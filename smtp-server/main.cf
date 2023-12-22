@@ -24,9 +24,9 @@ compatibility_level = 3.6
 #smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem Default conf
 #smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key Default conf
 
-smtpd_tls_cert_file=/etc/letsencrypt/<your.domain>/cert.pem
-smtpd_tls_key_file=/etc/letsencrypt/<your.domain>/privkey.pem
-smtpd_tls_CAfile=/etc/letsencrypt/<your.domain>/fullchain.pem
+smtpd_tls_cert_file=/etc/letsencrypt/live/<your.domain>/cert.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/<your.domain>/privkey.pem
+smtpd_tls_CAfile=/etc/letsencrypt/live/<your.domain>/fullchain.pem
 
 smtpd_tls_security_level=may
 

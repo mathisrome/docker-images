@@ -10,4 +10,6 @@ services:
         SMTP_PORT: ${SMTP_PORT} # 587 for OVH
     volumes:
       - ./infra/volumes/prod/logs/smtp-server:/var/log/postfix
-      - /etc/letsencrypt/live/${DOMAIN_NAME}:/etc/letsencrypt/live/${DOMAIN_NAME}
+      - /etc/letsencrypt/live/${DOMAIN_NAME}/cert.pem:/etc/letsencrypt/live/${DOMAIN_NAME}/cert.pem
+      - /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem:/etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem
+      - /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem:/etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem
