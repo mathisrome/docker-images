@@ -30,7 +30,7 @@ smtp      inet  n       -       y       -       -       smtpd
 #  -o milter_macro_daemon_name=ORIGINATING
 # Choose one: enable smtps for loopback clients only, or for any client.
 #127.0.0.1:smtps inet n  -       y       -       -       smtpd
-smtps     inet  n       -       y       -       -       smtpd
+smtps     inet  n       -       n       -       -       smtpd
 #  -o syslog_name=postfix/smtps
   -o smtpd_tls_wrappermode=yes
   -o smtpd_sasl_auth_enable=yes
