@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt install -y postfix vim nano curl iputils-ping certbot
 
 COPY main.cf /etc/postfix/main.cf
-COPY master.cf /etc/postfix/master.cs
+COPY master.cf /etc/postfix/master.cf
 
 RUN sed -i "s/relayhost =/relayhost = [${SMTP_DOMAIN}]:${SMTP_PORT}/g" /etc/postfix/main.cf && \
     sed -i "s/<your.domain>/${DOMAIN_NAME}/g" /etc/postfix/main.cf && \
