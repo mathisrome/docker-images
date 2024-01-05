@@ -8,10 +8,18 @@ ARG SMTP_PORT
 
 RUN apt-get update && \
     apt install -y mailutils && \
-    apt install -y postfix vim nano curl iputils-ping certbot
+    apt install -y postfix vim nano curl iputils-ping certbot && \
+    apt install -y opendkim opendkim-tools
 
-COPY main.cf /etc/postfix/main.cf
-COPY master.cf /etc/postfix/master.cf
+COPY postfix/main.cf /etc/postfix/main.cf
+COPY postfix/master.cf /etc/postfix/master.cf
+
+COPY dkim/opendkim.conf /etc/opendkim.conf
+COPY dkim/default/opendkim /etc/default/opendkim
+
+COPY dkim/TrustedHosts /etc/opendkim/TrustedHosts
+COPY dkim/KeyTable /etc/opendkim/KeyTable
+COPY dkim/SigningTable /etc/opendkim/SigningTable
 
 RUN sed -i "s/relayhost =/relayhost = [${SMTP_DOMAIN}]:${SMTP_PORT}/g" /etc/postfix/main.cf && \
     sed -i "s/<your.domain>/${DOMAIN_NAME}/g" /etc/postfix/main.cf && \

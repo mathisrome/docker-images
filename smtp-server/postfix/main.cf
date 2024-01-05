@@ -53,4 +53,12 @@ smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd
 smtp_use_tls = yes
 smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 
+# Log file path
 maillog_file = /var/log/postfix/postfix.log
+
+
+# OpenDKIM
+milter_protocol = 2
+milter_default_action = accept
+smtpd_milters = inet:localhost:17789
+non_smtpd_milters = inet:localhost:17789
