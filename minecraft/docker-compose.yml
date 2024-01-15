@@ -1,0 +1,9 @@
+services:
+  server:
+    build:
+      context: .
+    volumes:
+      - ./server:/server
+    ports:
+      - 25565:25565
+    command: "java -Xmx2048M -Xms1024M -jar server.jar nogui"
