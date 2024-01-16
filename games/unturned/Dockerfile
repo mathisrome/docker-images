@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install software-properties-common curl wget unzip vim nano -y
+RUN apt-get install software-properties-common curl wget unzip vim nano procps -y
 RUN apt-add-repository -y non-free
 RUN dpkg --add-architecture i386
 RUN apt-get update
