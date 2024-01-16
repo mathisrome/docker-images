@@ -1,0 +1,10 @@
+services:
+  unturned:
+    build:
+      context: .
+    volumes:
+      - unturned-server:/steam-servers/unturned-server/Servers/MyServer
+    command: ./ServerHelper.sh +InternetServer/MyServer
+
+volumes:
+  unturned-server:
