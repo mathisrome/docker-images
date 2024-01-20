@@ -1,0 +1,15 @@
+FROM php:8.2-fpm-alpine
+
+RUN apk update && apk add curl
+
+## Config Timezone
+RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+## PHP Extensions & Composer
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+RUN install-php-extensions mysqli pdo pdo_mysql
+
+## Copie des sources
+ADD --chown=www-data:www-data build.tar.gz /var/www/
+
+VOLUME ["/var/www/wordpress"]
