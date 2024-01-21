@@ -3,9 +3,9 @@ services:
     build:
       context: .
     volumes:
-      - minecraft-data:/server
+      - server_data:/server
     ports:
       - 25565:25565
 
 volumes:
-  minecraft-data:
+  server_data:

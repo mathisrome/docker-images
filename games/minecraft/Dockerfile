@@ -1,7 +1,7 @@
-FROM openjdk:23-slim-bullseye
+FROM eclipse-temurin:21-jdk-jammy
 
-RUN apt-get update && \
-    apt-get upgrade && \
+RUN apt-get update -y && \
+    apt-get upgrade -y  && \
     apt-get install curl nano vim zip screen procps -y
 
 WORKDIR /server
