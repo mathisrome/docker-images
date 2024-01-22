@@ -16,6 +16,8 @@ RUN install-php-extensions mysqli pdo pdo_mysql
 
 ## Section d'installation si votre projet wordpress n'est pas créé
 
+WORKDIR "/var/www"
+
 RUN curl -O https://wordpress.org/latest.tar.gz && \
     tar -xzvf latest.tar.gz && \
     rm latest.tar.gz && \
