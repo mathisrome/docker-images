@@ -5,6 +5,6 @@ RUN apt-get update && \
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 
-RUN install-php-extensions mysqli pdo pdo_mysql
+RUN install-php-extensions mysqli pdo pdo_mysql exif imagick zip gd intl
 
 WORKDIR /var/www/wordpress

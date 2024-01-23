@@ -7,20 +7,11 @@ RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 ## PHP Extensions & Composer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions mysqli pdo pdo_mysql
+RUN install-php-extensions mysqli pdo pdo_mysql exif imagick zip gd intl
 
 ## Section d'installation si votre projet wordpress est dans un repo GIT
 
 ## Copie des sources
 #ADD --chown=www-data:www-data build.tar.gz /var/www/
 
-## Section d'installation si votre projet wordpress n'est pas créé
-
-WORKDIR "/var/www"
-
-RUN curl -O https://wordpress.org/latest.tar.gz && \
-    tar -xzvf latest.tar.gz && \
-    rm latest.tar.gz && \
-    chown -R www-data:www-data wordpress
-
-VOLUME ["/var/www/wordpress"]
+#VOLUME ["/var/www/wordpress"]

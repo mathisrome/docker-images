@@ -19,6 +19,7 @@ services:
       - ./infra/volumes/prod/composer:/root/.composer
       - ./infra/php/prod/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
       - ./infra/php/prod/project.ini:/usr/local/etc/php/conf.d/project.ini:ro
+      - ./wordpress:/var/www/wordpress
     depends_on:
       - mysql
     tty: true
