@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.3.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+      - ./infra/volumes/dev/database:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./infra/volumes/dev/composer:/root/.composer
+      - ./infra/php/dev/project.ini:/usr/local/etc/php/conf.d/project.ini:ro
+      - ./wordpress:/var/www/wordpress
+    environment:
+      APP_ENV: dev
+    depends_on:
+      - mysql
+    tty: true
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./infra/volumes/dev/logs/nginx:/var/log/nginx
+      - ./infra/nginx/dev/virtualhost.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./wordpress:/var/www/wordpress
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    tty: true

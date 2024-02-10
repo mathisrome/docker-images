@@ -1,0 +1,10 @@
+FROM php:8.2-fpm
+
+RUN apt-get update && \
+    apt-get install curl
+
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
+RUN install-php-extensions mysqli pdo pdo_mysql exif imagick zip gd intl
+
+WORKDIR /var/www/wordpress

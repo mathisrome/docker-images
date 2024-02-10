@@ -3,9 +3,10 @@ services:
     build:
       context: .
     volumes:
-      - server_data:/server
+      - ./server:/server
+    command: > 
+      sh -c "chmod 755 start-server.sh && 
+             ./start-server.sh && 
+             tail -f /dev/null"
     ports:
       - 25565:25565
-
-volumes:
-  server_data:
