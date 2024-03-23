@@ -1,0 +1,12 @@
+services:
+  steamcmd:
+    build:
+      context: .
+    tty: true
+    command: tail -f /dev/null
+    volumes:
+      - ./steam-servers:/home/steam/steam-servers
+    ports:
+      - 15777:15777/udp
+      - 7777:7777/udp
+      - 15000:15000/udp
