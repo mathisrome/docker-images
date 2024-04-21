@@ -1,0 +1,58 @@
+services:
+  mariadb:
+    image: mariadb:11.1.2
+    restart: unless-stopped
+    volumes:
+      - ./infra/volumes/dev/database:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+
+  symfony-php:
+    build:
+      context: ./infra/dev/symfony-php
+    volumes:
+      - ./infra/volumes/dev/composer:/root/.composer
+      - ./infra/dev/symfony-php/project.ini:/usr/local/etc/php/conf.d/project.ini:ro
+      - ./api:/var/www/api
+    environment:
+      APP_ENV: dev
+    depends_on:
+      - mariadb
+    tty: true
+
+  symfony-nginx:
+    image: nginx:latest
+    volumes:
+      - ./infra/volumes/dev/logs/nginx:/var/log/nginx
+      - ./infra/dev/symfony-nginx/virtualhost.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./api:/var/www/api
+    ports:
+      - "80:80"
+    depends_on:
+      - symfony-php
+    tty: true
+
+  vuejs:
+    build:
+      context: ./infra/dev/vuejs
+    ports:
+      - 5173:5173
+    command: tail -f /dev/null # Une fois le projet installé remplacé par `sh -c "npm install && npm run format && npm run dev"`
+    volumes:
+      - ./app:/var/www/app
+
+  mailcatcher:
+    restart: on-failure
+    image: schickling/mailcatcher
+    ports: [ 1025, 1080:1080 ]
