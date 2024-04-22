@@ -1,4 +1,4 @@
-# Installer VueJs
+# Installer Vite
 
 Aller dans le service `vite`, puis lancer la commande suivante :
 
