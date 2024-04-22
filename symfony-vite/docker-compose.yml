@@ -43,9 +43,9 @@ services:
       - symfony-php
     tty: true
 
-  vuejs:
+  vite:
     build:
-      context: ./infra/dev/vuejs
+      context: ./infra/dev/vite
     ports:
       - 5173:5173
     command: tail -f /dev/null # Une fois le projet installé remplacé par `sh -c "npm install && npm run format && npm run dev"`

@@ -1,9 +1,9 @@
 # Installer VueJs
 
-Aller dans le service `vuejs`, puis lancer la commande suivante :
+Aller dans le service `vite`, puis lancer la commande suivante :
 
 ```bash
-npm create vue@latest ./
+npm create vite ./
 ```
 
 Puis suivez les instructions...
