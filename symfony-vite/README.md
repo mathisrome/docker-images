@@ -19,5 +19,10 @@ vite --host 0.0.0.0
 Aller dans le service `symfony-php`, puis lancer les commandes suivantes :
 
 ```bash
-composer create-project symfony/skeleton:"6.4.*" . && composer require webapp
+composer create-project symfony/skeleton:"6.4.*" . &&
+composer require symfony/orm-pack -n &&
+composer require --dev symfony/maker-bundle -n &&
+composer require --dev symfony/profiler-pack -n &&
+composer require symfony/security-bundle -n && 
+composer require --dev orm-fixtures -n
 ```
