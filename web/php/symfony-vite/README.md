@@ -14,6 +14,8 @@ Une fois l'installation terminé, modifier le fichier `package.json` en changean
 vite --host 0.0.0.0
 ```
 
+Une fois ceci fait, arrêter le docker compose, modifier la ligne 51 avec les informations mises en commentaires et rédemarrer le docker compose
+
 # Installer Symfony
 
 Aller dans le service `symfony-php`, puis lancer les commandes suivantes :

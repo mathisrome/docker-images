@@ -48,7 +48,7 @@ services:
       context: ./infra/dev/vite
     ports:
       - 5173:5173
-    command: tail -f /dev/null # Une fois le projet installé remplacé par `sh -c "npm install && npm run format && npm run dev"`
+    command: tail -f /dev/null # Une fois le projet installé remplacé par `sh -c "npm install && npm run dev"`
     volumes:
       - ./app:/var/www/app
 
