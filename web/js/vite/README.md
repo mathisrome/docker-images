@@ -1,17 +1,19 @@
-# Installer Vite
+# Installation du projet
 
-Aller dans le service `vite`, puis lancer la commande suivante :
+Lancer la commande suivante :
 
-```bash
-npm create vite ./
+```shell
+bash init.sh
 ```
 
-Puis suivez les instructions...
-
-Une fois l'installation terminé, modifier le fichier `package.json` en changeant le script `dev` en mettant comme valeur :
+Une fois cette commande terminée, modifier le `package.json` pour modifier le script `dev` par :
 
 ```text
-vite --host 0.0.0.0
+"dev": "vite --host",
 ```
 
-Une fois ceci fait, arrêter le docker compose, modifier la ligne 7 avec les informations mises en commentaires et rédemarrer le docker compose
+Maintenant vous pouvez relancer la commande :
+
+```shell
+docker-compose up -d
+```

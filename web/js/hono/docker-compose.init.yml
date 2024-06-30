@@ -1,0 +1,14 @@
+services:
+  hono:
+    build:
+      context: ./infra/dev/hono
+    ports:
+      - 3000:3000
+    command: tail -f /dev/null
+    volumes:
+      - ./app:/var/www/app
+
+  mailcatcher:
+    restart: on-failure
+    image: schickling/mailcatcher
+    ports: [ 1025, 1080:1080 ]
