@@ -1,0 +1,23 @@
+services:
+  hono:
+    build:
+      context: ./infra/dev/hono
+    ports:
+      - 3000:3000
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - ./back:/var/www/back
+
+  vite:
+    build:
+      context: ./infra/dev/vite
+    ports:
+      - 5173:5173
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - ./front:/var/www/front
+
+  mailcatcher:
+    restart: on-failure
+    image: schickling/mailcatcher
+    ports: [ 1025, 1080:1080 ]
