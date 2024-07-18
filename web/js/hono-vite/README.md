@@ -6,14 +6,6 @@ Lancer la commande suivante :
 bash init.sh
 ```
 
-Une fois cette commande terminée, modifier le `package.json` du dossier `vite` pour modifier le script `dev` par :
-
-```text
-"dev": "vite --host",
-```
-
-Maintenant vous pouvez relancer la commande :
-
-```shell
-docker-compose up -d
-```
+Une fois le script terminé vous pouvez aller sur les urls suivantes :
+- Back-End : http://localhost:3000
+- Front-End : http://localhost:5173
