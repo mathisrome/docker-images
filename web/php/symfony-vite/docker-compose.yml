@@ -9,15 +9,6 @@ services:
     ports:
       - "3306:3306"
 
-  phpmyadmin:
-    image: phpmyadmin:latest
-    environment:
-      PMA_HOST: mariadb
-      PMA_USER: root
-      PMA_PASSWORD: root
-    ports:
-      - "8080:80"
-
   symfony-php:
     build:
       context: ./infra/dev/symfony-php
@@ -48,7 +39,7 @@ services:
       context: ./infra/dev/vite
     ports:
       - 5173:5173
-    command: tail -f /dev/null # Une fois le projet installé remplacé par `sh -c "npm install && npm run dev"`
+    command: tail -f /dev/null
     volumes:
       - ./app:/var/www/app
 
