@@ -7,6 +7,5 @@ services:
     volumes:
       - ./steam-servers:/home/steam/steam-servers
     ports:
-      - 15777:15777/udp
       - 7777:7777/udp
-      - 15000:15000/udp
+      - 27020:27020/tcp
