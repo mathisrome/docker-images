@@ -7,8 +7,3 @@ services:
     command: tail -f /dev/null
     volumes:
       - ./app:/var/www/app
-
-  mailcatcher:
-    restart: on-failure
-    image: schickling/mailcatcher
-    ports: [ 1025, 1080:1080 ]

@@ -1,9 +1,28 @@
 #!/bin/bash
 
-docker compose -f docker-compose.init.yml up -d
-docker compose -f docker-compose.init.yml exec vite npm create vite ./
-docker compose -f docker-compose.init.yml down
+# Installation de Vite
+docker compose exec vite npm create vite ./
 
-mv docker-compose.dev.yml docker-compose.yml
+docker compose down
 
-rm docker-compose.init.yml
+FILE="app/package.json"
+SEARCH_PATTERN='"dev": "vite"'
+REPLACE_PATTERN='"dev": "vite --host"'
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # macOS
+  sed -i '' "s/$SEARCH_PATTERN/$REPLACE_PATTERN/" "$FILE"
+else
+  # Linux and other Unix-like OS
+  sed -i "s/$SEARCH_PATTERN/$REPLACE_PATTERN/" "$FILE"
+fi
+
+FILE="docker-compose.yml"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i '' -e '/vite:/,/command:/s|command: tail -f /dev/null|command: sh -c "npm install \&\& npm run dev"|' "$FILE"
+else
+  sed -i -e '/vite:/,/command:/s|command: tail -f /dev/null|command: sh -c "npm install \&\& npm run dev"|' "$FILE"
+fi
+
+docker compose up -d
