@@ -1,5 +1,8 @@
 #!/bin/bash
 
+docker compose build
+docker compose up -d
+
 # Installation de Vite
 docker compose exec vite npm create vite ./
 
