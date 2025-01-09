@@ -13,8 +13,6 @@ services:
     build:
       context: ./
       dockerfile: php-fpm.dockerfile
-    volumes:
-      - ./app:/var/www/app
     develop:
       watch:
         - action: sync

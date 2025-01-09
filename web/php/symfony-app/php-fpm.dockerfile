@@ -15,12 +15,12 @@ COPY infra/dev/symfony-php/project.ini /usr/local/etc/php/conf.d/project.ini
 
 ## PHP Extensions & Composer
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions gd exif pdo_mysql intl zip bcmath && install-php-extensions @composer
-RUN mkdir /var/www/.composer && chown -R www-data:www-data /var/www/.composer
+RUN install-php-extensions gd exif pdo_mysql intl zip bcmath @composer
+RUN mkdir /var/www/.composer && chown -R app:app /var/www/.composer
 
 WORKDIR /var/www/app
 
 # Copy source files into application directory
 COPY --chown=app:app ./app /var/www/app
 
-USER app:www-data
+USER app
