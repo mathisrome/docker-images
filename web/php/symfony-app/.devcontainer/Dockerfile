@@ -1,5 +1,7 @@
 FROM php:8.3-fpm
 
+RUN useradd -ms /bin/sh -u 1000 app
+
 RUN apt-get update && \
     apt-get install -y --no-install-recommends curl \
     procps \
@@ -22,6 +24,8 @@ RUN install -m 0755 -d /etc/apt/keyrings && \
     apt-get update && \
     apt-get install -y docker-ce-cli docker-buildx-plugin docker-compose-plugin
 
-RUN useradd -ms /bin/sh -u 1000 app
+RUN mkdir -p /var/run && \
+    touch /var/run/docker.sock && \
+    chown -R app:app /var/run/docker.sock
 
 USER app
