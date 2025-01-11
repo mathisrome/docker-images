@@ -21,3 +21,7 @@ RUN install -m 0755 -d /etc/apt/keyrings && \
       tee /etc/apt/sources.list.d/docker.list > /dev/null && \
     apt-get update && \
     apt-get install -y docker-ce-cli docker-buildx-plugin docker-compose-plugin
+
+RUN useradd -ms /bin/sh -u 1000 app
+
+USER app
