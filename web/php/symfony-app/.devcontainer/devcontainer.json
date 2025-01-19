@@ -1,9 +1,15 @@
 {
-  "name": "My docker images",
+  "name": "My docker images (Version Dockerfile)",
   "dockerFile": "./Dockerfile",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind,consistency=cached"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
+  "remoteEnv": {
+    "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+  },
+  "containerUser": "root",
+  "postCreateCommand": "chown app:app /var/run/docker.sock",
+  "remoteUser": "app"
 }

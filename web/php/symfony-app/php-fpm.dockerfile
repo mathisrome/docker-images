@@ -14,9 +14,12 @@ RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
 COPY infra/dev/symfony-php/project.ini /usr/local/etc/php/conf.d/project.ini
 
 ## PHP Extensions & Composer
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions gd exif pdo_mysql intl zip bcmath @composer
-RUN mkdir /var/www/.composer && chown -R app:app /var/www/.composer
+RUN curl -sSLf \
+        -o /usr/local/bin/install-php-extensions \
+        https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
+    chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions gd exif pdo_mysql intl zip bcmath @composer && \
+    mkdir /var/www/.composer && chown -R app:app /var/www/.composer
 
 WORKDIR /var/www/app
 
