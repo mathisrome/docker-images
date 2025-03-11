@@ -1,15 +1,24 @@
 {
-  "name": "My docker images (Version Dockerfile)",
-  "dockerFile": "./Dockerfile",
-  "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind,consistency=cached"
-  ],
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
-  "workspaceFolder": "/workspace",
+  "name": "[Optional]",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "php-fpm",
+  "workspaceFolder": "/var/www/app",
   "remoteEnv": {
     "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
   },
-  "containerUser": "root",
-  "postCreateCommand": "chown app:app /var/run/docker.sock",
-  "remoteUser": "app"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "devsense.phptools-vscode",
+        "ecmel.vscode-html-css",
+        "ms-azuretools.vscode-docker",
+        "DEVSENSE.composer-php-vscode",
+        "whatwedo.twig",
+        "nadim-vscode.twig-code-snippets",
+        "mblode.twig-language-2",
+        "redhat.vscode-yaml",
+        "nadim-vscode.symfony-code-snippets"
+      ]
+    }
+  }
 }

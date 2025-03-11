@@ -3,13 +3,10 @@ FROM nginx:1.27.3-bookworm
 RUN useradd -ms /bin/sh -u 1000 app
 
 ## Setup configuration file
-COPY ./infra/dev/symfony-nginx/virtualhost.conf /etc/nginx/conf.d/default.conf
-COPY ./infra/dev/symfony-nginx/default.conf /etc/nginx/default.conf
+COPY ./infra/dev/nginx/virtualhost.conf /etc/nginx/conf.d/default.conf
+COPY ./infra/dev/nginx/default.conf /etc/nginx/default.conf
 
 WORKDIR /var/www/app
-
-# Copy source files into application directory
-COPY --chown=app:app ./app /var/www/app
 
 RUN chown -R app:app /var/cache/nginx
 RUN chown -R app:app /var/log/nginx
