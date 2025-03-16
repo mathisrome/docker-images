@@ -6,6 +6,7 @@
   "remoteEnv": {
     "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
   },
+  "shutdownAction": "stopCompose",
   "customizations": {
     "vscode": {
       "extensions": [

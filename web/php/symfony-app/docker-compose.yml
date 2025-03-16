@@ -26,6 +26,18 @@ services:
     networks:
       - backend
 
+  # Add this service if you create a webapp running with encore.
+  # If package.json does'nt exist, the service shutdown instantly
+  # node:
+  #   image: node:23-alpine3.21
+  #   volumes:
+  #     - ./app:/var/www/app
+  #   depends_on:
+  #     - php-fpm
+  #   tty: true
+  #   command: sh -c "yarn install && yarn watch"
+  #   working_dir: "/var/www/app"
+
 networks:
   backend:
   mariadb:
