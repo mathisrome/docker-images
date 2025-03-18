@@ -5,8 +5,7 @@ RUN useradd -ms /bin/sh -u 1000 app
 
 ## Installation des utilitaires
 RUN apt-get update && \
-    apt-get install -y curl \
-    git
+    apt-get install -y git --no-install-recommends
 # RUN apt-get vim nano git zip wkhtmltopdf # Ajouté les paquets nécéssaires
 
 ## Config Timezone

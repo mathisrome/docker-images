@@ -1,4 +1,4 @@
-# Initialisation du projet
+# Avant de lancer le projet
 
 Si vous avez besoin de créer une application avec une base de données vous devez avoir un container `mariadb` de lancé :
 
@@ -13,3 +13,5 @@ Si vous avez besoin de créer une application qui envoie des mails vous pouvez v
 docker network create mailpit && \
 docker run -d --name=mailpit --restart unless-stopped -p 8025:8025 -p 1025:1025 --hostname=mailpit --network mailpit -it -e MP_SMTP_AUTH_ACCEPT_ANY=1 -e MP_SMTP_AUTH_ALLOW_INSECURE=1 axllent/mailpit
 ```
+
+Si vous n'avez pas besoin d'un des deux services ci-dessus, n'oubliez pas de changer les déclarations dans le `docker-compose.yml`
